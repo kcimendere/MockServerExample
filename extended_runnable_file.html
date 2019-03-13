@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Test</title>
+		<script id="sap-ui-bootstrap" src="../../resources/sap-ui-core.js" data-sap-ui-theme="sap_belize" data-sap-ui-resourceroots="{&quot;kerem.test.Test&quot;: &quot;./&quot;}" data-sap-ui-compatversion="edge" data-sap-ui-async="true" data-sap-ui-oninit="module:sap/ui/core/ComponentSupport" data-sap-ui-frameoptions="trusted">
+		</script>
+	
+<script>
+var bRunWithMock = true;
+var sRunWithMock = jQuery.sap.getUriParameters().get('run-with-mock');
+if (sRunWithMock === 'false') {
+bRunWithMock = false;
+}
+if (bRunWithMock) {
+jQuery.sap.require('sap.ui.core.util.MockServer');
+var uri = '/test1/sap/opu/odata/IWBEP/GWSAMPLE_BASIC/';
+var oMock = new sap.ui.core.util.MockServer({rootUri : uri});
+var _sAppModulePath = "kerem.test.Test/";
+var sMetadataPath = "localService/metadata.xml";
+var sMetadataUrl = jQuery.sap.getModulePath(_sAppModulePath) + "/" + sMetadataPath;
+oMock.simulate(sMetadataUrl);
+oMock.start();
+	sap.ui.getCore().attachInit(function () {
+		sap.m.MessageToast.show('Running in demo mode with mock data.', {  duration : 4000 });
+	});
+}
+</script>
+
+
+		
+			<!--data-sap-ui-modules="sap.m"-->
+	</head>
+	<body class="sapUiBody">
+		<div data-sap-ui-component="" data-name="kerem.test.Test" data-id="container" data-settings="{&quot;id&quot; : &quot;Test&quot;}"></div>
+	</body>
+</html>
